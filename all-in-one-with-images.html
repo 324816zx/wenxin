@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>雯芯的生日祝福</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=ZCOOL+KuaiLe&family=ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#ff6b8b',
+                        secondary: '#74b9ff',
+                        accent: '#feca57',
+                        light: '#f5f6fa',
+                        dark: '#2d3436'
+                    },
+                    fontFamily: {
+                        zheng: ['Ma Shan Zheng', 'cursive'],
+                        kuaiLe: ['ZCOOL KuaiLe', 'cursive'],
+                        qingKe: ['ZCOOL QingKe HuangYou', 'cursive']
+                    },
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'bounce-slow': 'bounce 3s infinite',
+                        'heartbeat': 'heartbeat 1.5s ease-in-out infinite'
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        heartbeat: {
+                            '0%, 100%': { transform: 'scale(1)' },
+                            '14%': { transform: 'scale(1.3)' },
+                            '28%': { transform: 'scale(1)' },
+                            '42%': { transform: 'scale(1.3)' },
+                            '70%': { transform: 'scale(1)' },
+                        }
+                    }
+                },
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            }
+            .text-shadow-lg {
+                text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+            }
+            .bg-blur {
+                backdrop-filter: blur(8px);
+            }
+            .scrollbar-hide::-webkit-scrollbar {
+                display: none;
+            }
+            .scrollbar-hide {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+            .animate-float-slow {
+                animation: float 4s ease-in-out infinite;
+            }
+            .animate-float-medium {
+                animation: float 2.5s ease-in-out infinite;
+            }
+            .animate-float-fast {
+                animation: float 1.5s ease-in-out infinite;
+            }
+            .perspective-1000 {
+                perspective: 1000px;
+            }
+            .preserve-3d {
+                transform-style: preserve-3d;
+            }
+            .backface-hidden {
+                backface-visibility: hidden;
+            }
+            .animate-heartbeat-slow {
+                animation: heartbeat 2s ease-in-out infinite;
+            }
+            .animate-spin-slow {
+                animation: spin 8s linear infinite;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-b from-pink-50 to-blue-50 min-h-screen overflow-x-hidden font-qingKe text-dark">
+    <!-- 密码输入界面 -->
+    <div id="password-screen" class="fixed inset-0 bg-dark z-50 flex flex-col items-center justify-center p-4 transition-opacity duration-1000">
+        <div class="text-center mb-8">
+            <h1 class="text-[clamp(2rem,6vw,3.5rem)] font-zheng text-primary animate-pulse-slow">雯芯的生日祝福</h1>
+            <p class="text-light mt-2 text-[clamp(1rem,3vw,1.2rem)]">请输入密码解锁惊喜</p>
+        </div>
+        <div class="password-input-container bg-white/10 backdrop-blur-md p-8 rounded-2xl shadow-2xl max-w-md w-full border border-white/20">
+            <div id="password-display" class="text-[clamp(1.5rem,5vw,2.5rem)] text-center py-4 mb-6 font-zheng text-light"></div>
+            <div class="grid grid-cols-3 gap-4 mb-4">
+                <button class="number-btn bg-white/20 hover:bg-white/30 text-light text-2xl py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1" data-number="1">1</button>
+                <button class="number-btn bg-white/20 hover:bg-white/30 text-light text-2xl py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1" data-number="2">2</button>
+                <button class="number-btn bg-white/20 hover:bg-white/30 text-light text-2xl py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1" data-number="3">3</button>
+                <button class="number-btn bg-white/20 hover:bg-white/30 text-light text-2xl py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1" data-number="4">4</button>
+                <button class="number-btn bg-white/20 hover:bg-white/30 text-light text-2xl py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1" data-number="5">5</button>
+                <button class="number-btn bg-white/20 hover:bg-white/30 text-light text-2xl py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1" data-number="6">6</button>
+                <button class="number-btn bg-white/20 hover:bg-white/30 text-light text-2xl py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1" data-number="7">7</button>
+                <button class="number-btn bg-white/20 hover:bg-white/30 text-light text-2xl py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1" data-number="8">8</button>
+                <button class="number-btn bg-white/20 hover:bg-white/30 text-light text-2xl py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1" data-number="9">9</button>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <button id="clear-btn" class="bg-red-500/70 hover:bg-red-500 text-light text-xl py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1">
+                    <i class="fa fa-refresh mr-2"></i>清除
+                </button>
+                <button class="number-btn bg-white/20 hover:bg-white/30 text-light text-2xl py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1" data-number="0">0</button>
+            </div>
+        </div>
+        <div class="mt-8 text-light/70 text-sm">
+            <p>密码提示: 她的生日</p>
+        </div>
+    </div>
+
+    <!-- 主页面 -->
+    <div id="main-content" class="hidden">
+        <!-- 顶部音频控制 -->
+        <div class="fixed top-4 right-4 z-40 bg-white/80 backdrop-blur-md rounded-full p-2 shadow-lg border border-gray-100 animate-float">
+            <button id="music-toggle" class="w-12 h-12 flex items-center justify-center rounded-full bg-primary/90 text-white hover:bg-primary transition-all duration-300 shadow-md hover:shadow-lg">
+                <i class="fa fa-play" id="music-icon"></i>
+            </button>
+            <div id="current-song" class="absolute top-full right-0 mt-2 bg-white/90 backdrop-blur-md px-3 py-2 rounded-lg shadow-lg border border-gray-100 text-sm text-gray-700 whitespace-nowrap opacity-0 transition-opacity duration-300 pointer-events-none">
+                正在播放: <span id="song-name">加载中...</span>
+            </div>
+            <audio id="bg-music" loop>
+                <source src="" type="audio/mpeg">
+            </audio>
+        </div>
+
+        <!-- 英雄区 -->
+        <section class="relative h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-pink-300 via-purple-300 to-blue-300">
+            <div class="absolute inset-0 overflow-hidden">
+                <!-- 漂浮元素 -->
+                <div class="absolute w-40 h-40 bg-white/20 rounded-full blur-3xl -top-20 -left-20 animate-pulse-slow"></div>
+                <div class="absolute w-60 h-60 bg-pink-300/30 rounded-full blur-3xl bottom-20 -right-20 animate-pulse-slow" style="animation-delay: 1s"></div>
+                <div class="absolute w-80 h-80 bg-blue-300/20 rounded-full blur-3xl top-1/4 right-1/4 animate-pulse-slow" style="animation-delay: 2s"></div>
+            </div>
+            <div class="relative z-10 text-center px-4">
+                <!-- 漂浮装饰元素 -->
+                <div class="absolute -top-20 left-1/4 w-16 h-16 bg-pink-300/40 rounded-full blur-xl animate-float-fast"></div>
+                <div class="absolute top-10 right-1/4 w-12 h-12 bg-blue-300/40 rounded-full blur-xl animate-float-medium"></div>
+                <div class="absolute -bottom-10 left-1/3 w-20 h-20 bg-yellow-300/30 rounded-full blur-xl animate-float-slow"></div>
+                
+                <h1 class="text-[clamp(2.5rem,8vw,5rem)] font-zheng text-white text-shadow-lg mb-4 animate-float">生日快乐，雯芯！</h1>
+                <p class="text-[clamp(1rem,4vw,1.5rem)] text-white/90 font-kuaiLe mb-8 text-shadow">
+                    特别的日子，特别的祝福，送给特别的你
+                </p>
+                <div class="flex justify-center mt-6 perspective-1000">
+                    <div class="w-40 h-40 md:w-48 md:h-48 rounded-full bg-gradient-to-r from-pink-300 to-purple-300 p-1 animate-pulse-slow transform transition-all duration-1000 hover:scale-105">
+                        <div class="w-full h-full rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border-4 border-white/30 shadow-xl animate-float-slow">
+                            <img src="1.jpg" alt="雯芯" class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-3 border-white shadow-lg transform transition-all duration-1000 hover:scale-110 hover:rotate-5">
+                        </div>
+                    </div>
+                </div>
+                <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce-slow">
+                    <a href="#countdown" class="text-white/90 hover:text-white transition-colors duration-300">
+                        <i class="fa fa-angle-down text-3xl"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 相识天数计数 -->
+        <section id="countdown" class="py-20 px-4 bg-white relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-blue-300/30 to-transparent"></div>
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-[clamp(1.8rem,5vw,2.5rem)] font-zheng text-primary mb-2">我们相识的日子</h2>
+                <p class="text-gray-600 mb-12">从 2025年4月25日 23:24 开始</p>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
+                    <div class="countdown-item bg-gradient-to-br from-pink-100 to-pink-50 p-6 rounded-2xl shadow-lg border border-pink-100 transform transition-all duration-500 hover:scale-105 hover:shadow-xl perspective-1000 preserve-3d">
+                        <div class="text-[clamp(2rem,8vw,4rem)] font-zheng text-primary" id="days">00</div>
+                        <div class="text-gray-600 mt-2 font-kuaiLe">天</div>
+                    </div>
+                    <div class="countdown-item bg-gradient-to-br from-blue-100 to-blue-50 p-6 rounded-2xl shadow-lg border border-blue-100 transform transition-all duration-500 hover:scale-105 hover:shadow-xl perspective-1000 preserve-3d">
+                        <div class="text-[clamp(2rem,8vw,4rem)] font-zheng text-secondary" id="hours">00</div>
+                        <div class="text-gray-600 mt-2 font-kuaiLe">时</div>
+                    </div>
+                    <div class="countdown-item bg-gradient-to-br from-yellow-100 to-yellow-50 p-6 rounded-2xl shadow-lg border border-yellow-100 transform transition-all duration-500 hover:scale-105 hover:shadow-xl perspective-1000 preserve-3d">
+                        <div class="text-[clamp(2rem,8vw,4rem)] font-zheng text-accent" id="minutes">00</div>
+                        <div class="text-gray-600 mt-2 font-kuaiLe">分</div>
+                    </div>
+                    <div class="countdown-item bg-gradient-to-br from-green-100 to-green-50 p-6 rounded-2xl shadow-lg border border-green-100 transform transition-all duration-500 hover:scale-105 hover:shadow-xl perspective-1000 preserve-3d">
+                        <div class="text-[clamp(2rem,8vw,4rem)] font-zheng text-green-500" id="seconds">00</div>
+                        <div class="text-gray-600 mt-2 font-kuaiLe">秒</div>
+                    </div>
+                </div>
+                <div class="bg-blue-50 p-6 rounded-xl border border-blue-100 shadow-md max-w-2xl mx-auto">
+                    <p class="text-gray-700 text-center font-kuaiLe">
+                        <i class="fa fa-heart text-primary animate-heartbeat mr-2"></i>
+                        时间在变，我们的友谊不变
+                        <i class="fa fa-heart text-primary animate-heartbeat ml-2"></i>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 城市地图 -->
+        <section class="py-20 px-4 bg-gradient-to-b from-blue-50 to-white relative overflow-hidden">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-[clamp(1.8rem,5vw,2.5rem)] font-zheng text-center text-secondary mb-12">我们的城市</h2>
+                <div class="city-map-container relative h-[400px] md:h-[500px] bg-blue-100 rounded-2xl shadow-xl overflow-hidden border border-blue-200 mb-8">
+                    <!-- 这里将通过JavaScript渲染SVG地图 -->
+                    <div id="city-map" class="w-full h-full"></div>
+                    <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-white/80 backdrop-blur-sm px-6 py-3 rounded-full shadow-lg border border-blue-200 text-center">
+                        <p class="text-blue-700 font-kuaiLe">山东曲阜 <i class="fa fa-long-arrow-right mx-2 text-gray-400"></i> 河南光山</p>
+                    </div>
+                </div>
+                <div class="text-center text-gray-600 max-w-2xl mx-auto">
+                    <p>虽然相隔两地，但心的距离很近很近。感谢网络让我们相遇，期待未来的每一天。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 个人信息 -->
+        <section class="py-20 px-4 bg-white">
+            <div class="max-w-5xl mx-auto">
+                <h2 class="text-[clamp(1.8rem,5vw,2.5rem)] font-zheng text-center text-primary mb-16">我们的小世界</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-16">
+                    <!-- 我的信息 -->
+                    <div class="bg-gradient-to-br from-pink-50 to-pink-100 rounded-2xl shadow-lg p-6 md:p-8 border border-pink-200 transform transition-all duration-500 hover:-translate-y-2 hover:shadow-xl">
+                        <div class="flex justify-center mb-6">
+                            <div class="w-24 h-24 rounded-full bg-white shadow-lg flex items-center justify-center border-4 border-pink-200">
+                                <img src="1.jpg" alt="雯芯" class="w-20 h-20 rounded-full object-cover">
+                            </div>
+                        </div>
+                        <h3 class="text-[clamp(1.5rem,4vw,2rem)] font-zheng text-center text-primary mb-4">张雯芯</h3>
+                        <p class="text-center text-gray-600 mb-6 font-kuaiLe">2009年8月29日 (七夕节) <i class="fa fa-star text-yellow-400 ml-1"></i></p>
+                        <div class="mb-6 p-4 bg-white/60 rounded-xl border border-pink-100">
+                            <p class="text-gray-700 text-center italic">"讨厌对谁都温柔的人"</p>
+                        </div>
+                        <h4 class="text-lg font-kuaiLe text-gray-700 mb-3 flex items-center"><i class="fa fa-heart text-pink-500 mr-2"></i> 我喜欢</h4>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
+                            <div class="bg-white p-3 rounded-xl shadow border border-gray-100 text-center transform transition-all duration-300 hover:scale-110 hover:shadow-lg">
+                                <img src="3.jpg" alt="古河渚" class="w-16 h-16 mx-auto rounded-lg object-cover mb-2 transform transition-all duration-500 hover:rotate-3">
+                                <p class="text-sm font-medium text-gray-700">古河渚</p>
+                            </div>
+                            <div class="bg-white p-3 rounded-xl shadow border border-gray-100 text-center transform transition-all duration-300 hover:scale-110 hover:shadow-lg">
+                                <img src="4.jpg" alt="冈崎朋也" class="w-16 h-16 mx-auto rounded-lg object-cover mb-2 transform transition-all duration-500 hover:rotate-3">
+                                <p class="text-sm font-medium text-gray-700">冈崎朋也</p>
+                            </div>
+                            <div class="bg-white p-3 rounded-xl shadow border border-gray-100 text-center transform transition-all duration-300 hover:scale-110 hover:shadow-lg">
+                                <img src="5.jpg" alt="毛泽东" class="w-16 h-16 mx-auto rounded-lg object-cover mb-2 transform transition-all duration-500 hover:rotate-3">
+                                <p class="text-sm font-medium text-gray-700">毛泽东</p>
+                            </div>
+                            <div class="bg-white p-3 rounded-xl shadow border border-gray-100 text-center transform transition-all duration-300 hover:scale-110 hover:shadow-lg">
+                                <img src="question.png" alt="喜欢的人" class="w-16 h-16 mx-auto rounded-lg object-cover mb-2 transform transition-all duration-500 hover:rotate-3">
+                                <p class="text-sm font-medium text-gray-700">喜欢的人</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 他的信息 -->
+                    <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl shadow-lg p-6 md:p-8 border border-blue-200 transform transition-all duration-500 hover:-translate-y-2 hover:shadow-xl">
+                        <div class="flex justify-center mb-6">
+                            <div class="w-24 h-24 rounded-full bg-white shadow-lg flex items-center justify-center border-4 border-blue-200">
+                                <img src="2.jpg" alt="张翔" class="w-20 h-20 rounded-full object-cover">
+                            </div>
+                        </div>
+                        <h3 class="text-[clamp(1.5rem,4vw,2rem)] font-zheng text-center text-secondary mb-4">张翔</h3>
+                        <p class="text-center text-gray-600 mb-6 font-kuaiLe">2007年1月23日 <i class="fa fa-moon-o text-blue-400 ml-1"></i></p>
+                        <div class="mb-6 p-4 bg-white/60 rounded-xl border border-blue-100">
+                            <p class="text-gray-700 text-center italic">"你个不懂事的东西"</p>
+                        </div>
+                        <h4 class="text-lg font-kuaiLe text-gray-700 mb-3 flex items-center"><i class="fa fa-heart text-blue-500 mr-2"></i> 他喜欢</h4>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
+                            <div class="bg-white p-3 rounded-xl shadow border border-gray-100 text-center transform transition-all duration-300 hover:scale-110 hover:shadow-lg col-span-1 sm:col-span-2">
+                                <img src="6.jpg" alt="铠甲勇士" class="w-16 h-16 mx-auto rounded-lg object-cover mb-2 transform transition-all duration-500 hover:rotate-3">
+                                <p class="text-sm font-medium text-gray-700">铠甲勇士</p>
+                            </div>
+                            <div class="bg-white p-3 rounded-xl shadow border border-gray-100 text-center transform transition-all duration-300 hover:scale-110 hover:shadow-lg col-span-1 sm:col-span-2">
+                                <img src="7.jpg" alt="李小龙" class="w-16 h-16 mx-auto rounded-lg object-cover mb-2 transform transition-all duration-500 hover:rotate-3">
+                                <p class="text-sm font-medium text-gray-700">李小龙</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 十六岁生日 -->
+        <section class="py-20 px-4 bg-gradient-to-b from-yellow-50 to-orange-50 relative overflow-hidden">
+            <div class="absolute inset-0 opacity-20">
+                <!-- 装饰元素 -->
+                <div class="absolute w-20 h-20 border-4 border-yellow-400 rounded-full -top-10 -left-10"></div>
+                <div class="absolute w-16 h-16 border-4 border-orange-400 rounded-full top-1/3 -right-8"></div>
+                <div class="absolute w-12 h-12 border-4 border-yellow-500 rounded-full bottom-1/4 -left-6"></div>
+                <div class="absolute w-24 h-24 border-4 border-orange-500 rounded-full -bottom-12 -right-12"></div>
+            </div>
+            <div class="max-w-4xl mx-auto relative z-10">
+                <h2 class="text-[clamp(1.8rem,5vw,2.5rem)] font-zheng text-center text-accent mb-16">十六岁的你</h2>
+                <div class="flex flex-col items-center justify-center mb-12">
+                    <div class="age-number text-[clamp(5rem,15vw,8rem)] font-zheng text-accent text-shadow mb-6 animate-float perspective-1000 preserve-3d transform hover:rotate-y-360 transition-all duration-2000 backface-hidden">16</div>
+                    <div class="text-center max-w-2xl">
+                        <p class="text-gray-700 text-lg mb-4">十六岁，是花一样的年纪，是梦开始的地方。</p>
+                        <p class="text-gray-700 text-lg">愿你在这个美好的年纪里，永远保持纯真与快乐，勇敢追逐自己的梦想。</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-yellow-100 transform transition-all duration-500 hover:scale-105">
+                        <h3 class="text-xl font-kuaiLe text-accent mb-4 flex items-center"><i class="fa fa-star text-yellow-400 mr-2"></i> 成长的足迹</h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full mt-1 mr-2 font-medium">2025.04.25</span>
+                                <span class="text-gray-700">我们第一次相遇，开启了这段特别的友谊</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full mt-1 mr-2 font-medium">2025.06.06</span>
+                                <span class="text-gray-700">第一次小矛盾，但让我们更了解彼此</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full mt-1 mr-2 font-medium">2025.07.24</span>
+                                <span class="text-gray-700">第二次争执，我们学会了更好地沟通</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full mt-1 mr-2 font-medium">2025.08.05</span>
+                                <span class="text-gray-700">第三次小矛盾，让我们的友谊更加坚定</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-yellow-100 transform transition-all duration-500 hover:scale-105">
+                        <h3 class="text-xl font-kuaiLe text-accent mb-4 flex items-center"><i class="fa fa-heart text-yellow-400 mr-2"></i> 16岁的期许</h3>
+                        <p class="text-gray-700 mb-4">十六岁的天空广阔而明亮，愿你：</p>
+                        <ul class="space-y-3 text-gray-700">
+                            <li class="flex items-center"><i class="fa fa-check-circle text-green-500 mr-2"></i> 学业进步，实现自己的目标</li>
+                            <li class="flex items-center"><i class="fa fa-check-circle text-green-500 mr-2"></i> 永远保持那份纯真和热情</li>
+                            <li class="flex items-center"><i class="fa fa-check-circle text-green-500 mr-2"></i> 健康快乐，笑口常开</li>
+                            <li class="flex items-center"><i class="fa fa-check-circle text-green-500 mr-2"></i> 生活顺遂平安喜乐</li>
+                            <li class="flex items-center"><i class="fa fa-check-circle text-green-500 mr-2"></i> 记得，无论何时，我都会是你的好朋友</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 命理学分析 -->
+        <section class="py-20 px-4 bg-white">
+            <div class="max-w-5xl mx-auto">
+                <h2 class="text-[clamp(1.8rem,5vw,2.5rem)] font-zheng text-center text-purple-600 mb-16">我们的缘分</h2>
+                <div class="mb-16 text-center max-w-2xl mx-auto">
+                    <div class="inline-block bg-purple-50 px-6 py-3 rounded-full border border-purple-100 shadow-sm mb-6">
+                        <h3 class="text-xl font-kuaiLe text-purple-700">镜映缘</h3>
+                    </div>
+                    <p class="text-gray-700 mb-4">当他的夫妻宫主星与你的命主星同为廉贞，形成「星曜共振」格局，此象在紫微斗数中称为「镜映缘」。</p>
+                    <p class="text-gray-700 mb-8">你们会像镜子般照见彼此最深层的特质，初遇即觉熟悉，似曾相识。</p>
+                    <div class="w-full max-w-md mx-auto rounded-xl overflow-hidden shadow-lg border border-purple-200 transform transition-all duration-500 hover:scale-105 hover:shadow-xl">
+                        <div class="relative w-full h-64 bg-gradient-to-r from-purple-200 to-pink-200 rounded-xl flex items-center justify-center overflow-hidden">
+    <div class="absolute inset-0 flex items-center justify-center opacity-20">
+        <i class="fa fa-heart text-9xl text-white"></i>
+    </div>
+    <div class="relative z-10 text-center p-6 bg-white/70 backdrop-blur-sm rounded-lg shadow-lg max-w-xs">
+        <h4 class="text-xl font-zheng text-purple-700 mb-2">镜映缘</h4>
+        <p class="text-gray-700 text-sm">他的夫妻宫主星与你的命主星同为廉贞，形成「星曜共振」格局</p>
+    </div>
+</div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-16">
+                    <!-- 我的五行 -->
+                    <div class="bg-gradient-to-br from-red-50 to-orange-50 rounded-2xl shadow-lg p-6 border border-red-100">
+                        <h3 class="text-xl font-zheng text-center text-red-600 mb-6">张翔 · 五行分析</h3>
+                        <div class="mb-6 text-center">
+                            <span class="bg-red-100 text-red-800 px-4 py-2 rounded-full text-sm font-medium">丁火 (阴火)</span>
+                            <span class="mx-2 text-gray-400">|</span>
+                            <span class="bg-yellow-100 text-yellow-800 px-4 py-2 rounded-full text-sm font-medium">偏财格</span>
+                        </div>
+                        <div class="mb-6">
+                            <canvas id="myFiveElementsChart" width="400" height="300"></canvas>
+                        </div>
+                        <div class="bg-white/70 p-4 rounded-xl border border-red-100">
+                            <h4 class="text-lg font-kuaiLe text-gray-700 mb-2">喜用神：金、水、土</h4>
+                            <ul class="text-gray-600 space-y-1 text-sm">
+                                <li><span class="text-green-600 font-medium">木：</span> 2%</li>
+                                <li><span class="text-red-600 font-medium">火：</span> 49%</li>
+                                <li><span class="text-yellow-600 font-medium">土：</span> 19%</li>
+                                <li><span class="text-gray-600 font-medium">金：</span> 24%</li>
+                                <li><span class="text-blue-600 font-medium">水：</span> 3%</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 她的五行 -->
+                    <div class="bg-gradient-to-br from-orange-50 to-yellow-50 rounded-2xl shadow-lg p-6 border border-orange-100">
+                        <h3 class="text-xl font-zheng text-center text-orange-600 mb-6">张雯芯 · 五行分析</h3>
+                        <div class="mb-6 text-center">
+                            <span class="bg-orange-100 text-orange-800 px-4 py-2 rounded-full text-sm font-medium">丙火 (阳火)</span>
+                            <span class="mx-2 text-gray-400">|</span>
+                            <span class="bg-yellow-100 text-yellow-800 px-4 py-2 rounded-full text-sm font-medium">偏财格</span>
+                        </div>
+                        <div class="mb-6">
+                            <canvas id="herFiveElementsChart" width="400" height="300"></canvas>
+                        </div>
+                        <div class="bg-white/70 p-4 rounded-xl border border-orange-100">
+                            <h4 class="text-lg font-kuaiLe text-gray-700 mb-2">喜用神：火、木</h4>
+                            <ul class="text-gray-600 space-y-1 text-sm">
+                                <li><span class="text-green-600 font-medium">木：</span> 3%</li>
+                                <li><span class="text-red-600 font-medium">火：</span> 22%</li>
+                                <li><span class="text-yellow-600 font-medium">土：</span> 22%</li>
+                                <li><span class="text-gray-600 font-medium">金：</span> 11%</li>
+                                <li><span class="text-blue-600 font-medium">水：</span> 38%</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl p-6 shadow-lg border border-purple-100 max-w-3xl mx-auto">
+                    <h3 class="text-xl font-kuaiLe text-center text-purple-700 mb-4">镜映缘 · 具体体现</h3><p class="text-gray-700 mb-4">特别的生日碰上七夕，这份缘分独一无二。愿你七夕快乐，每一天都充满幸福与喜悦。</p>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white/70 rounded-xl overflow-hidden">
+                            <thead class="bg-purple-100">
+                                <tr>
+                                    <th class="py-3 px-4 text-left text-gray-700 font-kuaiLe">维度</th>
+                                    <th class="py-3 px-4 text-left text-gray-700 font-kuaiLe">他 (夫妻宫廉贞)</th>
+                                    <th class="py-3 px-4 text-left text-gray-700 font-kuaiLe">你 (命主廉贞)</th>
+                                    <th class="py-3 px-4 text-left text-gray-700 font-kuaiLe">共振效应</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-purple-100">
+                                <tr>
+                                    <td class="py-3 px-4 font-medium text-gray-700">本质</td>
+                                    <td class="py-3 px-4 text-gray-600">追求灵魂深度契合</td>
+                                    <td class="py-3 px-4 text-gray-600">自带刚烈执着的底色</td>
+                                    <td class="py-3 px-4 text-gray-600">他能一眼看穿你的倔强与脆弱</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 font-medium text-gray-700">吸引</td>
+                                    <td class="py-3 px-4 text-gray-600">易被"有故事感"的人吸引</td>
+                                    <td class="py-3 px-4 text-gray-600">气场中暗藏矛盾魅力</td>
+                                    <td class="py-3 px-4 text-gray-600">初遇即觉熟悉 (似曾相识感)</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 font-medium text-gray-700">矛盾</td>
+                                    <td class="py-3 px-4 text-gray-600">化忌引发情绪波动 (需安全感)</td>
+                                    <td class="py-3 px-4 text-gray-600">孤克性导致口是心非</td>
+                                    <td class="py-3 px-4 text-gray-600">吵架像照镜子——气对方也气自己</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 生日祝福 -->
+        <section class="py-20 px-4 bg-gradient-to-b from-pink-100 via-purple-100 to-blue-100 relative overflow-hidden">
+            <div class="absolute inset-0 overflow-hidden opacity-20">
+                <!-- 装饰元素 -->
+                <div class="absolute top-0 left-0 w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMDIwMjAiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTI5LjY5IDM2LjVMMzIgMzguODFMMzQuMzEgMzYuNUwzMiAzNC4xOUwyOS42OSAzNi41WiIvPjxwYXRoIGQ9Ik0yOS42OSAyMy41TDMyIDI1LjgxTDM0LjMxIDIzLjVMMzIgMjEuMTlMMjkuNjkgMjMuNVoiLz48cGF0aCBkPSJNNjAgMzBIMFYzMEMwIDM1LjUyIDQuNDggNDAgMTAgNDBIMHYzQzAgNDguODggNy4xMiA1NiAxNiA1Nkg0NGM4Ljg4IDAgMTYtNy4xMiAxNi0xNlY0MEg1MEM1NS41MiA0MCA2MCAzNS41MiA2MCAzMFoiLz48cGF0aCBkPSJNNjAgMEgwdjM0YzAgNS41MiA0LjQ4IDEwIDEwIDEwaDUwYzUuNTIgMCAxMC00LjQ4IDEwLTEwVjBaIi8+PC9nPjwvZz48L3N2Zz4=')] bg-repeat"></div>
+            </div>
+            <div class="max-w-4xl mx-auto relative z-10">
+                <h2 class="text-[clamp(1.8rem,5vw,2.5rem)] font-zheng text-center text-primary mb-12">生日祝福</h2>
+                <div class="flex flex-col items-center mb-12">
+                    <div class="birthday-cake relative w-44 h-44 md:w-64 md:h-64 animate-float-slow mb-6 perspective-1000">
+                        <img src="birthday-cake.svg" alt="生日蛋糕" class="w-full h-full transform transition-transform duration-1000 hover:rotate-y-180 hover:scale-110 preserve-3d backface-hidden">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="w-8 h-8 bg-red-500 rounded-full animate-pulse-slow shadow-lg"></div>
+                        </div>
+                        <!-- 蛋糕装饰 -->
+                        <div class="absolute top-1/4 left-1/4 w-4 h-4 bg-yellow-300 rounded-full animate-float-fast"></div>
+                        <div class="absolute top-1/3 right-1/4 w-3 h-3 bg-pink-300 rounded-full animate-float-medium"></div>
+                        <div class="absolute bottom-1/4 left-1/3 w-5 h-5 bg-blue-300 rounded-full animate-float-slow"></div>
+                        <div class="absolute bottom-1/3 right-1/3 w-4 h-4 bg-green-300 rounded-full animate-float-fast"></div>
+                        <div class="absolute -top-4 -right-4 w-16 h-16 bg-pink-300/20 rounded-full blur-xl animate-pulse-slow"></div>
+                        <div class="absolute -bottom-4 -left-4 w-16 h-16 bg-blue-300/20 rounded-full blur-xl animate-pulse-slow" style="animation-delay: 1s"></div>
+                    </div>
+                    <h3 class="text-[clamp(1.5rem,4vw,2rem)] font-zheng text-primary text-center">张雯芯，生日快乐！</h3>
+                </div>
+                <div class="bg-white/80 backdrop-blur-md p-6 md:p-8 shadow-xl border border-pink-100 max-w-3xl mx-auto transform transition-all duration-500 hover:shadow-2xl">
+                    <!-- 装饰元素 -->
+                    <div class="absolute -top-5 -right-5 w-16 h-16 bg-pink-200 rounded-full opacity-50 animate-float-slow"></div>
+                    <div class="absolute -bottom-5 -left-5 w-12 h-12 bg-purple-200 rounded-full opacity-50 animate-float-medium"></div>
+                    
+                    <div class="prose prose-lg max-w-none mx-auto text-gray-700 font-kuaiLe leading-relaxed relative z-10">
+                        <p>亲爱的雯芯：</p>
+                        <p class="mt-4">今天是你的16岁生日，也是中国传统的七夕节，真是个特别又浪漫的日子。虽然我们相隔两地，但我的祝福和心意跨越距离，准时送到你的身边。</p>
+
+<div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-6 my-8 border border-blue-100">
+    <h4 class="text-xl font-kuaiLe text-center text-blue-700 mb-4">七夕 · 特别的相遇</h4>
+    <p class="text-gray-700 mb-3">每年七夕，是中国传统节日中承载着浪漫传说的日子。牛郎织女跨越银河的相聚，象征着人们对美好情感的向往。今年的七夕，恰好与你的生日相遇，这样的巧合为这个传统节日增添了一份特别的光彩。</p>
+    <p class="text-gray-700 mb-3">都说人与人的相遇是命运的安排，能在这样一个充满故事的日子里与你成为朋友，让我倍感珍惜。我们一起走过的时光，无论是欢笑还是小插曲，都已成为珍贵的回忆。</p>
+    <p class="text-gray-700">在这个充满诗意的节日里，愿你能感受到传统文化的魅力，也愿这份特别的相遇能为你带来好心情。七夕快乐！愿你如星空般璀璨，永远保持那份独特的魅力与光芒。</p>
+</div>
+                        <p class="mt-4">还记得我们相识的那天吗？2025年4月25日23:24，从那一刻起，我的世界里多了一个特别的你。虽然我们有时会有小矛盾、小争执，但这些都让我们更加了解彼此，让我们的友谊更加坚定。</p>
+                        <p class="mt-4">你是一个特别的女孩，有着自己的想法和坚持。你的倔强、你的脆弱、你的笑容、你的小脾气，都让我觉得你是那么真实、那么可爱。</p>
+                        <p class="mt-4">16岁，是人生中最美好的年纪之一。愿你在这个新的起点上，勇敢地追逐自己的梦想，保持那份纯真和热情。无论遇到什么困难和挑战，都要记得，你不是一个人在战斗，我会一直在你身边支持你、鼓励你。</p>
+                        <p class="mt-4">今天，我为你准备了这个小小的网站，里面包含了我们的回忆、我们的故事，还有我对你的祝福。希望你能喜欢这份礼物，就像我喜欢你这个朋友一样。</p>
+                        <p class="mt-4">最后，再次祝你生日快乐！愿你永远健康、快乐、美丽，愿你的每一天都充满阳光和希望。</p>
+                        <p class="mt-6 text-right">你的朋友：张翔</p>
+                        <p class="text-right text-sm text-gray-500">2025年8月6日</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 页脚 -->
+        <footer class="py-8 px-4 bg-dark text-white text-center">
+            <p class="font-kuaiLe text-gray-300 mb-2">特别的日子，特别的祝福</p>
+            <p class="text-gray-400 text-sm">© 2025 张翔 · 祝张雯芯生日快乐</p>
+        </footer>
+    </div>
+
+    <script>
+        // 密码解锁功能
+        const passwordScreen = document.getElementById('password-screen');
+        const mainContent = document.getElementById('main-content');
+        const passwordDisplay = document.getElementById('password-display');
+        const numberButtons = document.querySelectorAll('.number-btn');
+        const clearButton = document.getElementById('clear-btn');
+        const correctPassword = '0829';
+        let currentPassword = '';
+
+        numberButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                if (currentPassword.length < 4) {
+                    currentPassword += button.dataset.number;
+                    updatePasswordDisplay();
+
+                    if (currentPassword.length === 4) {
+                        setTimeout(checkPassword, 500);
+                    }
+                }
+            });
+        });
+
+        clearButton.addEventListener('click', () => {
+            currentPassword = '';
+            updatePasswordDisplay();
+        });
+
+        function updatePasswordDisplay() {
+            passwordDisplay.textContent = '*'.repeat(currentPassword.length);
+        }
+
+        function checkPassword() {
+            if (currentPassword === correctPassword) {
+                // 密码正确，进入主页面
+                passwordScreen.style.opacity = '0';
+                setTimeout(() => {
+                    passwordScreen.classList.add('hidden');
+                    mainContent.classList.remove('hidden');
+                    // 播放音乐
+                    playRandomMusic();
+                    // 初始化倒计时
+                    initCountdown();
+                    // 初始化地图
+                    initCityMap();
+                    // 初始化五行图表
+                    initFiveElementsCharts();
+                }, 1000);
+            } else {
+                // 密码错误，震动效果
+                passwordDisplay.classList.add('text-red-500');
+                passwordScreen.classList.add('animate-shake');
+                setTimeout(() => {
+                    passwordDisplay.classList.remove('text-red-500');
+                    passwordScreen.classList.remove('animate-shake');
+                    currentPassword = '';
+                    updatePasswordDisplay();
+                }, 1000);
+            }
+        }
+
+        // 音乐播放功能
+        const bgMusic = document.getElementById('bg-music');
+        const musicToggle = document.getElementById('music-toggle');
+        const musicIcon = document.getElementById('music-icon');
+        const currentSongElement = document.getElementById('current-song');
+        const songNameElement = document.getElementById('song-name');
+        const songs = [
+            {name: '疑心病', file: '疑心病.mp3'},
+            {name: '说好的幸福呢', file: '说好的幸福呢.mp3'},
+            {name: 'As Long As You Love Me', file: 'As Long As You Love Me.mp3'}
+        ]
+
+        // 添加错误处理
+        bgMusic.addEventListener('error', function() {
+            console.error('音乐加载失败:', bgMusic.src);
+            // 尝试播放下一首
+            setTimeout(playRandomMusic, 1000);
+        });
+
+        function playRandomMusic() {
+            const randomSong = songs[Math.floor(Math.random() * songs.length)];
+            bgMusic.src = randomSong.file;
+            songNameElement.textContent = randomSong.name;
+            bgMusic.play().catch(e => {
+                console.log('无法自动播放音乐:', e);
+                // 如果自动播放失败，等待用户交互后再播放
+                document.addEventListener('click', () => {
+                    bgMusic.play();
+                }, { once: true });
+            });
+        }
+
+        musicToggle.addEventListener('click', () => {
+            if (bgMusic.paused) {
+                bgMusic.play();
+                musicIcon.classList.remove('fa-play');
+                musicIcon.classList.add('fa-pause');
+            } else {
+                bgMusic.pause();
+                musicIcon.classList.remove('fa-pause');
+                musicIcon.classList.add('fa-play');
+            }
+        });
+
+        // 音乐信息显示
+        musicToggle.addEventListener('mouseenter', () => {
+            currentSongElement.style.opacity = '1';
+        });
+
+        musicToggle.addEventListener('mouseleave', () => {
+            currentSongElement.style.opacity = '0';
+        });
+
+        // 歌曲结束时自动播放下一首
+        bgMusic.addEventListener('ended', () => {
+            playRandomMusic();
+        });
+
+        // 倒计时功能
+        function initCountdown() {
+            const startDate = new Date(2025, 3, 25, 23, 24, 0); // 2025年4月25日23:24
+
+            function updateCountdown() {
+                const now = new Date();
+                const diff = now - startDate;
+
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+                document.getElementById('days').textContent = days.toString().padStart(2, '0');
+                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            }
+
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        }
+
+        // 城市地图功能
+        function initCityMap() {
+            const cityMap = document.getElementById('city-map');
+
+            // 创建SVG元素
+            const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            svg.setAttribute('width', '100%');
+            svg.setAttribute('height', '100%');
+            svg.setAttribute('viewBox', '0 0 800 600');
+
+            // 中国地图简化轮廓 (SVG路径)
+            const chinaPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            chinaPath.setAttribute('d', 'M150,100 Q250,50 350,100 T550,100 Q650,150 700,250 Q700,350 650,450 Q550,550 450,550 Q350,550 250,450 Q150,350 100,250 Q100,150 150,100 Z');
+            chinaPath.setAttribute('fill', '#e6f7ff');
+            chinaPath.setAttribute('stroke', '#74b9ff');
+            chinaPath.setAttribute('stroke-width', '2');
+            svg.appendChild(chinaPath);
+
+            // 山东曲阜位置
+            const qufuCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            qufuCircle.setAttribute('cx', '350');
+            qufuCircle.setAttribute('cy', '200');
+            qufuCircle.setAttribute('r', '8');
+            qufuCircle.setAttribute('fill', '#ff6b8b');
+            qufuCircle.setAttribute('stroke', 'white');
+            qufuCircle.setAttribute('stroke-width', '2');
+            svg.appendChild(qufuCircle);
+
+            // 山东曲阜文本
+            const qufuText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            qufuText.setAttribute('x', '370');
+            qufuText.setAttribute('y', '195');
+            qufuText.setAttribute('fill', '#ff6b8b');
+            qufuText.setAttribute('font-size', '16');
+            qufuText.setAttribute('font-weight', 'bold');
+            qufuText.textContent = '山东曲阜';
+            svg.appendChild(qufuText);
+
+            // 河南光山位置
+            const guangshanCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            guangshanCircle.setAttribute('cx', '300');
+            guangshanCircle.setAttribute('cy', '280');
+            guangshanCircle.setAttribute('r', '8');
+            guangshanCircle.setAttribute('fill', '#74b9ff');
+            guangshanCircle.setAttribute('stroke', 'white');
+            guangshanCircle.setAttribute('stroke-width', '2');
+            svg.appendChild(guangshanCircle);
+
+            // 河南光山文本
+            const guangshanText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            guangshanText.setAttribute('x', '320');
+            guangshanText.setAttribute('y', '285');
+            guangshanText.setAttribute('fill', '#74b9ff');
+            guangshanText.setAttribute('font-size', '16');
+            guangshanText.setAttribute('font-weight', 'bold');
+            guangshanText.textContent = '河南光山';
+            svg.appendChild(guangshanText);
+
+            // 连接线
+            const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+            line.setAttribute('x1', '350');
+            line.setAttribute('y1', '200');
+            line.setAttribute('x2', '300');
+            line.setAttribute('y2', '280');
+            line.setAttribute('stroke', '#a29bfe');
+            line.setAttribute('stroke-width', '2');
+            line.setAttribute('stroke-dasharray', '5,5');
+            svg.appendChild(line);
+
+            cityMap.appendChild(svg);
+        }
+
+        // 五行图表功能
+        function initFiveElementsCharts() {
+            // 我的五行图表
+            const myChart = new Chart(
+                document.getElementById('myFiveElementsChart'),
+                {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['木', '火', '土', '金', '水'],
+                        datasets: [{
+                            data: [2, 49, 19, 24, 3],
+                            backgroundColor: [
+                                '#55efc4', // 木 - 绿色
+                                '#ff7675', // 火 - 红色
+                                '#ffeaa7', // 土 - 黄色
+                                '#b2bec3', // 金 - 灰色
+                                '#74b9ff'  // 水 - 蓝色
+                            ],
+                            borderColor: [
+                                '#00b894',
+                                '#d63031',
+                                '#fdcb6e',
+                                '#636e72',
+                                '#0984e3'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    font: {
+                                        family: 'ZCOOL QingKe HuangYou, cursive'
+                                    }
+                                }
+                            },
+                            title: {
+                                display: false
+                            }
+                        },
+                        cutout: '70%'
+                    }
+                }
+            );
+
+            // 她的五行图表
+            const herChart = new Chart(
+                document.getElementById('herFiveElementsChart'),
+                {
+                    type: 'doughnut',
+                    data: {
+
+
+                        labels: ['木', '火', '土', '金', '水'],
+                        datasets: [{
+                            data: [3, 22, 22, 11, 38],
+                            backgroundColor: [
+                                '#55efc4', // 木 - 绿色
+                                '#ff7675', // 火 - 红色
+                                '#ffeaa7', // 土 - 黄色
+                                '#b2bec3', // 金 - 灰色
+                                '#74b9ff'  // 水 - 蓝色
+                            ],
+                            borderColor: [
+                                '#00b894',
+                                '#d63031',
+                                '#fdcb6e',
+                                '#636e72',
+                                '#0984e3'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    font: {
+                                        family: 'ZCOOL QingKe HuangYou, cursive'
+                                    }
+                                }
+                            },
+                            title: {
+                                display: false
+                            }
+                        },
+                        cutout: '70%'
+                    }
+                }
+            );
+        }
+
+        // 添加滚动动画
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // 添加进入动画
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            section.classList.add('opacity-0', 'translate-y-8', 'transition-all', 'duration-1000');
+            observer.observe(section);
+        });
+
+        // 自定义动画类
+        document.head.insertAdjacentHTML('beforeend', `
+            <style>
+                @keyframes fadeIn {
+                    from { opacity: 0; transform: translateY(20px); }
+                    to { opacity: 1; transform: translateY(0); }
+                }
+                .animate-fade-in {
+                    animation: fadeIn 1s ease-out forwards;
+                }
+                @keyframes shake {
+                    0%, 100% { transform: translateX(0); }
+                    25% { transform: translateX(-10px); }
+                    75% { transform: translateX(10px); }
+                }
+                .animate-shake {
+                    animation: shake 0.5s ease-in-out;
+                }
+            </style>
+        `);
+    </script>
+</body>
+</html>
